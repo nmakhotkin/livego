@@ -31,6 +31,15 @@ type ServerCfg struct {
 
 var RtmpServercfg ServerCfg
 
+var DefaultCfg = ServerCfg{
+	Server: []Application{
+		{
+			Appname: "",
+			Liveon: "on",
+		},
+	},
+}
+
 func LoadConfig(configfilename string) error {
 	log.Printf("starting load configure file(%s)......", configfilename)
 	data, err := ioutil.ReadFile(configfilename)
@@ -52,6 +61,10 @@ func LoadConfig(configfilename string) error {
 
 func CheckAppName(appname string) bool {
 	for _, app := range RtmpServercfg.Server {
+		if app.Appname == "" {
+			// Any app name
+			return true
+		}
 		if (app.Appname == appname) && (app.Liveon == "on") {
 			return true
 		}

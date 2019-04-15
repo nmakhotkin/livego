@@ -104,7 +104,7 @@ func (d *Decoder) DecodeAmf0String(r io.Reader, decodeMarker bool) (result strin
 	}
 
 	var bytes = make([]byte, length)
-	if bytes, err = ReadBytes(r, int(length)); err != nil {
+	if bytes, err = ReadBytes(r, int(length)); err != nil && err != io.EOF {
 		return "", Error("decode amf0: unable to decode string value: %s", err)
 	}
 

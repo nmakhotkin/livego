@@ -7,7 +7,7 @@ import (
 
 var (
 	maxGOPCap    int = 1024
-	ErrGopTooBig     = errors.New("gop to big")
+	ErrGopTooBig     = errors.New("gop too big")
 )
 
 type array struct {

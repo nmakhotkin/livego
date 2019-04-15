@@ -56,18 +56,28 @@ func (rs *RtmpStream) HandleWriter(w av.WriteCloser) {
 	log.Printf("HandleWriter: info[%v]", info)
 
 	var s *Stream
-	ok := rs.streams.Has(info.Key)
-	if !ok {
-		s = NewStream()
-		rs.streams.Set(info.Key, s)
-		s.info = info
-	} else {
-		item, ok := rs.streams.Get(info.Key)
-		if ok {
-			s = item.(*Stream)
-			s.AddWriter(w)
+	//ok := rs.streams.Has(info.Key)
+	//if !ok {
+	//	s = NewStream()
+	//	rs.streams.Set(info.Key, s)
+	//	s.info = info
+	//} else {
+	ticker := time.NewTicker(time.Millisecond * 500)
+	timeout := time.NewTimer(time.Second * 60)
+	for {
+		select {
+			case <-ticker.C:
+				item, ok := rs.streams.Get(info.Key)
+				if ok {
+					s = item.(*Stream)
+					s.AddWriter(w)
+					return
+				}
+			case <- timeout.C:
+				return
 		}
 	}
+	//}
 }
 
 func (rs *RtmpStream) GetStreams() cmap.ConcurrentMap {

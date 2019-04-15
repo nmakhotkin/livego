@@ -117,7 +117,7 @@ func main() {
 	log.Println("start livego, version", version)
 	err := configure.LoadConfig(*configfilename)
 	if err != nil {
-		return
+		configure.RtmpServercfg = configure.DefaultCfg
 	}
 
 	stream := rtmp.NewRtmpStream()
