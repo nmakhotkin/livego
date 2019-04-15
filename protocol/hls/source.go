@@ -6,10 +6,10 @@ import (
 	"bytes"
 	"log"
 	"errors"
-	"github.com/gwuhaolin/livego/parser"
-	"github.com/gwuhaolin/livego/av"
-	"github.com/gwuhaolin/livego/container/flv"
-	"github.com/gwuhaolin/livego/container/ts"
+	"github.com/nmakhotkin/livego/parser"
+	"github.com/nmakhotkin/livego/av"
+	"github.com/nmakhotkin/livego/container/flv"
+	"github.com/nmakhotkin/livego/container/ts"
 )
 
 const (
